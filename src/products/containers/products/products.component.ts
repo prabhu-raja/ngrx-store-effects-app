@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
 
   // constructor(private pizzaService: PizzasService) {}
 
-  constructor(private store: Store<fromStore.ProductsState>) {}
+  constructor(private store: Store<fromStore.ProductsState>) { }
 
   ngOnInit() {
     // this.pizzaService.getPizzas().subscribe(pizzas => {
@@ -49,5 +49,6 @@ export class ProductsComponent implements OnInit {
       */
 
     this.pizzas$ = this.store.select(fromStore.getAllPizzas);
+    this.store.dispatch(new fromStore.LoadPizzas());
   }
 }
