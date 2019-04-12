@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit {
       });
       */
 
-    this.pizzas$ = this.store.select(fromStore.getAllPizzas);
     this.store.dispatch(new fromStore.LoadPizzas());
+    this.pizzas$ = this.store.select(fromStore.getAllPizzas);
   }
 }
