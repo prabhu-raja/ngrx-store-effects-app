@@ -5,7 +5,7 @@ export interface ProductsState {
   pizzas: fromPizzasReducers.PizzaState
 }
 
-export const reducers = {
+export const allReducers = {
   pizzas: fromPizzasReducers.reducer
 };
 
