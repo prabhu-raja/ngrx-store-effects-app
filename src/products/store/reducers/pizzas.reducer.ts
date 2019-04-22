@@ -27,7 +27,7 @@ export function reducer(
   state = initialState,
   action: fromPizzasAction.PizzasAction
 ): PizzaState {
-  console.log('🤹‍', action);
+  console.log('🍕- Action', action);
   switch (action.type) {
     case fromPizzasAction.LOAD_PIZZAS: {
       return {
@@ -37,7 +37,7 @@ export function reducer(
     }
     //
     case fromPizzasAction.LOAD_PIZZAS_SUCCESS: {
-      console.log('👍- payload', action.payload)
+      console.log('🍕- Payload', action.payload)
       const data = action.payload;
       // Array to Object
       const entities = data.reduce((objEntities: { [id: number]: Pizza }, pizza: Pizza) => {
