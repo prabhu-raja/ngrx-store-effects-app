@@ -3,8 +3,8 @@ import { Actions, Effect } from '@ngrx/effects';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-import * as pizzaActions from '../actions';
-import * as fromServices from '../../services';
+import * as pizzaActions from '../actions/pizzas.action';
+import * as fromServices from '../../services/pizzas.service';
 
 @Injectable()
 export class PizzasEffects {

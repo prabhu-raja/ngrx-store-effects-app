@@ -17,7 +17,7 @@ export function reducer(
   state = initialState,
   action: fromToppingsAction.ToppingsAction
 ): ToppingsState {
-  console.log('🔝ping - Actions', action);
+  console.log('🧗‍Topping - Actions', action);
   switch (action.type) {
     //
     case fromToppingsAction.LOAD_TOPPINGS: {
@@ -56,6 +56,6 @@ export function reducer(
   }
 }
 
-export const getToppingEntities = (state: ToppingsState) => state.entities;
 export const getToppingLoaded = (state: ToppingsState) => state.loaded;
 export const getToppingLoading = (state: ToppingsState) => state.loading;
+export const getToppingEntities = (state: ToppingsState) => state.entities;
