@@ -4,13 +4,15 @@ import * as fromToppingsAction from '../actions/toppings.action';
 export interface ToppingsState {
   entities: { [id: number]: Topping },
   loaded: boolean,
-  loading: boolean
+  loading: boolean,
+  selectedToppings: number[]
 }
 
 export const initialState: ToppingsState = {
   entities: {},
   loaded: false,
-  loading: false
+  loading: false,
+  selectedToppings: []
 }
 
 export function reducer(
@@ -19,6 +21,14 @@ export function reducer(
 ): ToppingsState {
   console.log('🧗‍Topping - Actions', action);
   switch (action.type) {
+    //
+    case fromToppingsAction.VISUALISE_TOPPINGS: {
+      const selectedToppings = action.payload;
+      return {
+        ...state,
+        selectedToppings
+      }
+    }
     //
     case fromToppingsAction.LOAD_TOPPINGS: {
       return {
@@ -59,3 +69,4 @@ export function reducer(
 export const getToppingLoaded = (state: ToppingsState) => state.loaded;
 export const getToppingLoading = (state: ToppingsState) => state.loading;
 export const getToppingEntities = (state: ToppingsState) => state.entities;
+export const getSelectedToppings = (state: ToppingsState) => state.selectedToppings;
