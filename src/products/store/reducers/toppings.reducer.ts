@@ -64,6 +64,7 @@ export function reducer(
       }
     }
   }
+  return state;
 }
 
 export const getToppingLoaded = (state: ToppingsState) => state.loaded;
