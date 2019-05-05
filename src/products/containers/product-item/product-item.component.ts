@@ -9,6 +9,7 @@ import { Pizza } from '../../models/pizza.model';
 
 import { Topping } from '../../models/topping.model';
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
 // import { ToppingsService } from '../../services/toppings.service';
 
 @Component({
@@ -25,7 +26,7 @@ import { Observable } from 'rxjs/Observable';
         (update)="onUpdate($event)"
         (remove)="onRemove($event)">
         <pizza-display
-          [pizza]="visualise">
+          [pizza]="visualise$ | async">
         </pizza-display>
       </pizza-form>
     </div>
@@ -33,7 +34,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProductItemComponent implements OnInit {
   pizza$: Observable<Pizza>;
-  visualise: Pizza;
+  visualise$: Observable<Pizza>;
   toppings$: Observable<Topping[]>;
 
   constructor(
@@ -45,9 +46,18 @@ export class ProductItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new fromStore.LoadToppings);
-    this.pizza$ = this.store.select(fromStore.getSelectedPizza);
+    this.pizza$ = this.store.select(fromStore.getSelectedPizza)
+      .pipe(
+        tap((pizza: Pizza = null) => {
+          const pizzaExists = !!(pizza && pizza.toppings);
+          const toppings = pizzaExists
+            ? pizza.toppings.map(top => top.id)
+            : [];
+          this.store.dispatch(new fromStore.VisualiseToppings(toppings));
+        })
+      )
     this.toppings$ = this.store.select(fromStore.getAllToppings);
+    this.visualise$ = this.store.select(fromStore.getPizzaVisualised);
     //
     // this.pizzaService.getPizzas().subscribe(pizzas => {
     //   const param = this.route.snapshot.params.id;
@@ -66,6 +76,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   onSelect(event: number[]) {
+    this.store.dispatch(new fromStore.VisualiseToppings(event));
     // let toppings;
     // if (this.toppings && this.toppings.length) {
     //   toppings = event.map(id =>

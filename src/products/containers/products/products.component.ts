@@ -37,29 +37,9 @@ export class ProductsComponent implements OnInit {
     private store: Store<fromStore.ProductsState>) { }
 
   ngOnInit() {
-    /*
-    * Transformation 1
-    this.pizzaService.getPizzas().subscribe(pizzas => {
-      this.pizzas = pizzas;
-    });
-    */
-
-    /*
-    * Transformation 2
-    this.store.select<any>('products').subscribe(res => {
-      console.log('TCL: ProductsComponent -> ngOnInit -> res', res);
-    })
-    */
-
-    /*
-     * Transformation 3
-    this.store.select(fromStore.getAllPizzas).subscribe(res => {
-      console.log('TCL: ProductsComponent -> ngOnInit -> res ⏰⏰⏰', res);
-      this.pizzas = res;
-    });
-    */
-
     this.pizzas$ = this.store.select(fromStore.getAllPizzas);
-    this.store.dispatch(new fromStore.LoadPizzas())
+    this.store.dispatch(new fromStore.LoadPizzas());
+    this.store.dispatch(new fromStore.LoadToppings);
+
   }
 }
