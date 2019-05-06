@@ -18,11 +18,28 @@ export class PizzasEffects {
     .ofType(pizzaActions.LOAD_PIZZAS)
     .pipe(
       switchMap(() => {
-        return this.pizzaService.getPizzas()
+        return this.pizzaService
+          .getPizzas()
           .pipe(
             map(arrPizzas => new pizzaActions.LoadPizzasSuccess(arrPizzas)),
             catchError(err => of(new pizzaActions.LoadPizzasFail(err)))
-          )
+          );
       })
-    )
+    );
+
+  @Effect()
+  createPizza$ = this.actions$
+    .ofType(pizzaActions.CREATE_PIZZA)
+    .pipe(
+      map((axn: pizzaActions.CreatePizza) => axn.payload),
+      switchMap(plPizza => {
+        return this.pizzaService
+          .createPizza(plPizza)
+          .pipe(
+            map(pizza => new pizzaActions.CreatePizzaSuccess(pizza)),
+            catchError(err => of(new pizzaActions.CreatePizzaFail(err)))
+          );
+      })
+
+    );
 }
