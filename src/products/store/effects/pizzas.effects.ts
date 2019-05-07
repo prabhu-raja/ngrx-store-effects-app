@@ -40,6 +40,23 @@ export class PizzasEffects {
             catchError(err => of(new pizzaActions.CreatePizzaFail(err)))
           );
       })
+    );
 
+  @Effect()
+  updatePizza$ = this.actions$
+    .ofType(pizzaActions.UPDATE_PIZZA)
+    .pipe(
+      map((axn: pizzaActions.UpdatePizza) => {
+        debugger;
+        return axn.payload
+      }),
+      switchMap(plPizza => {
+        return this.pizzaService
+          .updatePizza(plPizza)
+          .pipe(
+            map(pizza => new pizzaActions.UpdatePizzaSuccess(pizza)),
+            catchError(err => of(new pizzaActions.UpdatePizzaFail(err)))
+          );
+      })
     );
 }
