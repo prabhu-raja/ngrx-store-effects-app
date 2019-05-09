@@ -46,8 +46,8 @@ export class CreatePizzaSuccess implements Action {
 
 //#region  //* Update Pizza
 export const UPDATE_PIZZA = '[Products] Update Pizza';
-export const UPDATE_PIZZA_FAIL = '[Products] Update Pizza_Fail';
-export const UPDATE_PIZZA_SUCCESS = '[Products] Update Pizza_Success';
+export const UPDATE_PIZZA_FAIL = '[Products] Update Pizza Fail';
+export const UPDATE_PIZZA_SUCCESS = '[Products] Update Pizza Success';
 
 export class UpdatePizza implements Action {
   readonly type = UPDATE_PIZZA;
@@ -66,6 +66,28 @@ export class UpdatePizzaSuccess implements Action {
 
 //#endregion
 
+//#region //* Remove Pizza
+export const REMOVE_PIZZA = '[Products] Remove Pizza';
+export const REMOVE_PIZZA_FAIL = '[Products] Remove Pizza Fail';
+export const REMOVE_PIZZA_SUCCESS = '[Products] Remove Pizza Success';
+
+export class RemovePizza implements Action {
+  readonly type = REMOVE_PIZZA;
+  constructor(public payload: Pizza, public test1: any = '1', private test2: any = '2') { }
+}
+
+export class RemovePizzaFail implements Action {
+  readonly type = REMOVE_PIZZA_FAIL;
+  constructor(public payload: any) { }
+}
+
+export class RemovePizzaSuccess implements Action {
+  readonly type = REMOVE_PIZZA_SUCCESS;
+  constructor(public payload: Pizza) { }
+}
+
+//#endregion
+
 export type PizzasAction =
   LoadPizzas |
   LoadPizzasFail |
@@ -75,4 +97,7 @@ export type PizzasAction =
   CreatePizzaSuccess |
   UpdatePizza |
   UpdatePizzaFail |
-  UpdatePizzaSuccess;
+  UpdatePizzaSuccess |
+  RemovePizza |
+  RemovePizzaFail |
+  RemovePizzaSuccess;

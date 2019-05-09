@@ -47,7 +47,7 @@ export class PizzasEffects {
     .ofType(pizzaActions.UPDATE_PIZZA)
     .pipe(
       map((axn: pizzaActions.UpdatePizza) => {
-        debugger;
+        // debugger;
         return axn.payload
       }),
       switchMap(plPizza => {
@@ -56,6 +56,24 @@ export class PizzasEffects {
           .pipe(
             map(pizza => new pizzaActions.UpdatePizzaSuccess(pizza)),
             catchError(err => of(new pizzaActions.UpdatePizzaFail(err)))
+          );
+      })
+    );
+
+  @Effect()
+  removePizza$ = this.actions$
+    .ofType(pizzaActions.REMOVE_PIZZA)
+    .pipe(
+      map((axn: pizzaActions.RemovePizza) => {
+        debugger;
+        return axn.payload;
+      }),
+      switchMap(plPizza => {
+        return this.pizzaService
+          .removePizza(plPizza)
+          .pipe(
+            map(() => new pizzaActions.RemovePizzaSuccess(plPizza)),
+            catchError(err => of(new pizzaActions.RemovePizzaFail(err)))
           );
       })
     );

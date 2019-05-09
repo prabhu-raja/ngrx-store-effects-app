@@ -177,20 +177,6 @@
         }
       ],
       "id": 4
-    },
-    {
-      "name": "ZZZ",
-      "toppings": [
-        {
-          "id": 1,
-          "name": "anchovy"
-        },
-        {
-          "id": 5,
-          "name": "mozzarella"
-        }
-      ],
-      "id": 5
     }
   ]
 }

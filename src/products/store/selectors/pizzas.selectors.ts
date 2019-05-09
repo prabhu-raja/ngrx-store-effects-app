@@ -33,7 +33,7 @@ export const getPizzaVisualised = createSelector(
   fromToppingsSelectors.getToppingEntities,
   fromToppingsSelectors.getSelectedToppings,
   (selectedPizza, toppingEntities, selectedToppings) => {
-    debugger;
+    // debugger;
     const toppings = selectedToppings.map(id => toppingEntities[id]);
     const test = { ...selectedPizza, toppings };
     console.log('TOP-', test);
