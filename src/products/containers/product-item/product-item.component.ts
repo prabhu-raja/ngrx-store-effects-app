@@ -11,21 +11,19 @@ import { ToppingsService } from '../../services/toppings.service';
   selector: 'product-item',
   styleUrls: ['product-item.component.scss'],
   template: `
-    <div 
-      class="product-item">
+    <div class="product-item">
       <pizza-form
         [pizza]="pizza"
         [toppings]="toppings"
         (selected)="onSelect($event)"
         (create)="onCreate($event)"
         (update)="onUpdate($event)"
-        (remove)="onRemove($event)">
-        <pizza-display
-          [pizza]="visualise">
-        </pizza-display>
+        (remove)="onRemove($event)"
+      >
+        <pizza-display [pizza]="visualise"> </pizza-display>
       </pizza-form>
     </div>
-  `,
+  `
 })
 export class ProductItemComponent implements OnInit {
   pizza: Pizza;
