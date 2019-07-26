@@ -20,7 +20,8 @@ import { Observable } from 'rxjs/Observable';
         <div *ngIf="!(pizzas$ | async)?.length">
           No pizzas, add one to get started.
         </div>
-        <pizza-item *ngFor="let pizza of (pizzas$ | async)" [pizza]="pizza"> </pizza-item>
+        <pizza-item *ngFor="let pizza of pizzas$ | async" [pizza]="pizza">
+        </pizza-item>
       </div>
     </div>
   `
@@ -40,5 +41,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.pizzas$ = this.store.select<any>(fromStore.getAllPizzas);
+    this.store.dispatch(new fromStore.LoadPizzas());
   }
 }
