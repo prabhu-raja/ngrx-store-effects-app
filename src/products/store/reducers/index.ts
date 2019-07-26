@@ -13,14 +13,8 @@ export const reducers: ActionReducerMap<ProductsState> = {
   pizzas: fromPizzaReducer.reducer
 };
 
-export const getProductsState = createFeatureSelector<ProductsState>(
-  'products'
-);
-
-export const getPizzaState = createSelector(
-  getProductsState,
-  (state: ProductsState) => state.pizzas
-);
+export const getProductsState = createFeatureSelector<ProductsState>('products');
+export const getPizzaState = createSelector(getProductsState, (state: ProductsState) => state.pizzas);
 
 export const getPizzasEntities = createSelector(getPizzaState, fromPizzaReducer.getPizzaEntities);
 export const getPizzasLoaded = createSelector(getPizzaState, fromPizzaReducer.getPizzasLoaded);
