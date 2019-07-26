@@ -2,13 +2,13 @@ import { Pizza } from 'src/products/models/pizza.model';
 import * as fromPizzas from '../actions/pizzas.action';
 
 export interface PizzaState {
-  data: Pizza[];
+  entities: { [id: number]: Pizza }
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: PizzaState = {
-  data: [],
+  entities: {},
   loaded: false,
   loading: false
 };
@@ -26,12 +26,13 @@ export function reducer(state = initialState, action: fromPizzas.PizzasAction): 
 
     case fromPizzas.LOAD_PIZZAS_SUCCESS: {
       console.log('act-🏆', action.payload);
-      const data = action.payload;
+      const pizzas = action.payload;
+      const entities = convertToObj(pizzas, state.entities)
       return {
         ...state,
         loaded: true,
         loading: false,
-        data
+        entities
       };
     }
 
@@ -46,7 +47,18 @@ export function reducer(state = initialState, action: fromPizzas.PizzasAction): 
   return state;
 }
 
+function convertToObj(pizzas: Pizza[], existEntities: { [id: number]: Pizza }) {
+  const entities = pizzas.reduce((accumulated: { [id: number]: Pizza }, item) => {
+    accumulated[item.id] = item;
+    return accumulated;
+  }, {
+      ...existEntities
+    }
+  );
+  return entities;
+}
+
 // * Selectors
-export const getPizzas = (state: PizzaState) => state.data;
+export const getPizzaEntities = (state: PizzaState) => state.entities;
 export const getPizzasLoaded = (state: PizzaState) => state.loaded;
 export const getPizzasLoading = (state: PizzaState) => state.loading;
