@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: fromPizzas.PizzasAction): 
     }
 
     case fromPizzas.LOAD_PIZZAS_SUCCESS: {
-      console.log('act-🏆', action.payload);
+      console.log('🍕 - action', action.payload);
       const pizzas = action.payload;
       const entities = convertToObj(pizzas, state.entities)
       return {
@@ -58,7 +58,6 @@ function convertToObj(pizzas: Pizza[], existEntities: { [id: number]: Pizza }) {
   return entities;
 }
 
-// * Selectors
 export const getPizzaEntities = (state: PizzaState) => state.entities;
 export const getPizzasLoaded = (state: PizzaState) => state.loaded;
 export const getPizzasLoading = (state: PizzaState) => state.loading;
