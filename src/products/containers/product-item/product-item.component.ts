@@ -9,7 +9,7 @@ import { ToppingsService } from '../../services/toppings.service';
 
 import * as fromStore from '../../store';
 import { Store } from '@ngrx/store';
-import { ObservableInput } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'product-item',
@@ -18,7 +18,7 @@ import { ObservableInput } from 'rxjs/Observable';
     <div class="product-item">
       <pizza-form
         [pizza]="pizza$ | async"
-        [toppings]="toppings"
+        [toppings]="toppings$ |async"
         (selected)="onSelect($event)"
         (create)="onCreate($event)"
         (update)="onUpdate($event)"
@@ -29,9 +29,9 @@ import { ObservableInput } from 'rxjs/Observable';
   `
 })
 export class ProductItemComponent implements OnInit {
-  pizza$: ObservableInput<Pizza>;
+  pizza$: Observable<Pizza>;
   visualise: Pizza;
-  toppings: Topping[];
+  toppings$: Observable<Topping[]>;
 
   constructor(
     private store: Store<fromStore.ProductsState>
@@ -41,6 +41,7 @@ export class ProductItemComponent implements OnInit {
     debugger;
     this.store.dispatch(new fromStore.LoadToppings());
     this.pizza$ = this.store.select(fromStore.getSelectedPizza);
+    this.toppings$ = this.store.select(fromStore.getAllToppings);
     /*
     this.pizzaService.getPizzas().subscribe(pizzas => {
       const param = this.route.snapshot.params.id;
