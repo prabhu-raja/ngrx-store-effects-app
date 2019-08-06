@@ -14,3 +14,4 @@ export const getAllToppings = createSelector(getToppingEntities, (entities) => {
 
 export const getToppingsLoaded = createSelector(getToppingsState, fromToppingsReducer.getToppingsLoading);
 export const getToppingsLoading = createSelector(getToppingsState, fromToppingsReducer.getToppingsLoading);
+export const getSelectedToppings = createSelector(getToppingsState, fromToppingsReducer.getSelectedToppings);

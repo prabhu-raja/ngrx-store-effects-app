@@ -23,7 +23,7 @@ import { Observable } from 'rxjs/Observable';
         (create)="onCreate($event)"
         (update)="onUpdate($event)"
         (remove)="onRemove($event)">
-        <pizza-display [pizza]="visualise"> </pizza-display>
+        <pizza-display [pizza]="visualise"></pizza-display>
       </pizza-form>
     </div>
   `
