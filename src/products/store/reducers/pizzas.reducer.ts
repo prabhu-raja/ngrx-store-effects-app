@@ -43,6 +43,27 @@ export function reducer(state = initialState, action: fromPizzas.PizzasAction): 
         loading: false
       };
     }
+
+    case fromPizzas.CREATE_PIZZA: {
+
+    }
+
+    case fromPizzas.CREATE_PIZZA_SUCCESS: {
+      const pizza = action.payload;
+      const entities = {
+        ...state.entities,
+        [pizza.id]: pizza
+      };
+      return {
+        ...state,
+        entities
+      }
+
+    }
+
+    case fromPizzas.CREATE_PIZZA_FAIL: {
+
+    }
   }
   return state;
 }

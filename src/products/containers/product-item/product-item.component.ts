@@ -87,6 +87,8 @@ export class ProductItemComponent implements OnInit {
   }
 
   onCreate(event: Pizza) {
+    debugger;
+    this.store.dispatch(new fromStore.CreatePizza(event));
     /*
     this.pizzaService.createPizza(event).subscribe(pizza => {
       this.router.navigate([`/products/${pizza.id}`]);
