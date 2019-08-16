@@ -71,7 +71,6 @@ export class ProductItemComponent implements OnInit {
   }
 
   onSelect(event: number[]) {
-    debugger;
     this.store.dispatch(new fromStore.VisualiseToppings(event));
     /*
     let toppings;
@@ -97,6 +96,8 @@ export class ProductItemComponent implements OnInit {
   }
 
   onUpdate(event: Pizza) {
+    debugger;
+    this.store.dispatch(new fromStore.UpdatePizza(event));
     /*
     this.pizzaService.updatePizza(event).subscribe(() => {
       this.router.navigate([`/products`]);

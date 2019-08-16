@@ -13,8 +13,7 @@ export class PizzasEffects {
   ) { }
 
   @Effect()
-  loadPizzas$ = this.actions$
-    .ofType(fromPizzaAction.LOAD_PIZZAS)
+  loadPizzas$ = this.actions$.ofType(fromPizzaAction.LOAD_PIZZAS)
     .pipe(
       switchMap(() => {
         return this.pizzasService.getPizzas()
@@ -26,8 +25,7 @@ export class PizzasEffects {
     );
 
   @Effect()
-  createPizza$ = this.actions$
-    .ofType(fromPizzaAction.CREATE_PIZZA)
+  createPizza$ = this.actions$.ofType(fromPizzaAction.CREATE_PIZZA)
     .pipe(
       map((action: fromPizzaAction.CreatePizza) => action.payload),
       switchMap(pizza => {
@@ -36,6 +34,19 @@ export class PizzasEffects {
           .pipe(
             map(pzza => new fromPizzaAction.CreatePizzaSuccess(pzza)),
             catchError(err => of(new fromPizzaAction.CreatePizzaFail(err)))
+          );
+      })
+    );
+
+  @Effect()
+  updatePizza$ = this.actions$.ofType(fromPizzaAction.UPDATE_PIZZA)
+    .pipe(
+      map((action: fromPizzaAction.UpdatePizza) => action.payload),
+      switchMap(pizza => {
+        return this.pizzasService.updatePizza(pizza)
+          .pipe(
+            map(pzza => new fromPizzaAction.UpdatePizzaSuccess(pzza)),
+            catchError(err => of(new fromPizzaAction.UpdatePizzaFail(err)))
           );
       })
     );
